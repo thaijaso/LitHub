@@ -2,6 +2,7 @@ myApp.factory('ReservationFactory', function($http) {
 	var factory = {};
 	var factoryItem;
 
+	// this is run automatically when user goes to vendor and strains
 	factory.getItem = function(vendorID, strainID, callback) {
 		$http.get('/getItem/' + vendorID + "/" + strainID).success(function (item) {
 			factoryItem = item;

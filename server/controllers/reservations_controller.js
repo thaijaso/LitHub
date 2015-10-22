@@ -42,9 +42,9 @@ module.exports = (function() {
 		},
 
 		add: function(req, res) {
-			var post = {user_id: req.body.user_id, vendor_id: req.body.vendor_id, quantity_gram: req.body.quantity_gram, quantity_eigth: req.body.quantity_eigth, quantity_quarter: req.body.quantity_quarter, quantity_half: req.body.quantity_half, quantity_oz: req.body.quantity_oz, created_at: req.body.created_at, updated_at: req.body.created_at, status: 0, strain_id: req.body.strain_id};
+			var post = {user_id: req.body.user_id, vendor_id: req.body.vendor_id, quantity_gram: req.body.quantity_gram, quantity_eigth: req.body.quantity_eigth, quantity_quarter: req.body.quantity_quarter, quantity_half: req.body.quantity_half, quantity_oz: req.body.quantity_oz, status: 0, strain_id: req.body.strain_id};
 			pool.getConnection(function(err, connection) {
-				connection.query("INSERT INTO reservations SET ?", post, function(error, reservations, fields) {
+				connection.query("INSERT INTO reservations SET ?, created_at = NOW(), updated_at = NOW()", post, function(error, reservations, fields) {
 					if (error) {
 						console.log(error);
 					} else {

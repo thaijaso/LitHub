@@ -11,6 +11,7 @@ var pool = mysql.createPool({
 module.exports = (function() {
 	return {
 		retrieve: function(req, res) {
+			console.log("this is req.body.id", req.body.id)
 			pool.getConnection(function(err, connection) {
 				connection.query("SELECT users.first_name, users.last_name, vendors.name as vendor, vendors_has_strains.price_gram, reservations.quantity_gram, reservations.quantity_eigth, reservations.quantity_quarter, reservations.quantity_half, reservations.quantity_oz, strains.name, strains.category, reservations.status, reservations.id, reservations.strain_id FROM reservations JOIN users ON users.id = reservations.user_id JOIN vendors ON vendors.id = reservations.vendor_id JOIN vendors_has_strains ON vendors_has_strains.strain_id = reservations.strain_id JOIN strains ON strains.id = vendors_has_strains.strain_id WHERE reservations.user_id = " + "'" + req.body.id + "'" + " GROUP BY reservations.id;",
 				function(error, reservations, fields) {

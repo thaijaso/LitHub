@@ -1,5 +1,5 @@
 var mysql = require('mysql');
-var connection = mysql.createConnection({
+var pool = mysql.createPool({
   	host : 'us-cdbr-iron-east-03.cleardb.net',
   	user : 'bb08a4822ce4b1',
   	password : '10f0179b',
@@ -10,15 +10,21 @@ var connection = mysql.createConnection({
 module.exports = (function() {
 	return {
 		show: function(req, res) {
-			connection.query('SELECT * FROM strains', function(error, results, fields) {
-				res.json(results);
+			pool.getConnection(function(err, connection) {
+				connection.query('SELECT * FROM strains', function(error, results, fields) {
+					res.json(results);
+				});
+				connection.release();
 			});
 		},
 		getPage: function(req, res) {
 			console.log('logging the request body: ', req.body);
-			connection.query('SELECT * FROM strains ORDER BY id DESC LIMIT ' + req.body.begin + ', ' + req.body.end, function(error, results, fields) {
-				res.json(results);
-			})
+			pool.getConnection(function(err, connection) {
+				connection.query('SELECT * FROM strains ORDER BY id DESC LIMIT ' + req.body.begin + ', ' + req.body.end, function(error, results, fields) {
+					res.json(results);
+				});
+				connection.release();
+			});
 		}	
 	}
 })();

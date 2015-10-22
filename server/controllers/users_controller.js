@@ -22,13 +22,16 @@ module.exports = (function() {
 						res.json(error);
 					} else {
 						// this is for iOS users
-						if (typeof user[0] !== 'undefined' ) {
-							console.log(typeof user)
-							console.log('valid login!!', user)
+						if (user) {
+							console.log(typeof user);
+							console.log('valid login!! #2', user[0].first_name);
 							req.session.email = user[0].email;
 							req.session.user_id = user[0].id;
-							console.log('this is the session stuff:', req.session)
-							res.json(user)
+							req.session.vendor_status = user[0].vendor_status;
+
+							console.log('this is the session stuff:', req.session);
+							console.log('luis is here',user);
+							res.json(user);
 						} else {
 							// again, this error stuff is for iOS. The iOS app will crash if it sends that request and gets nil back. it needs a value.
 							res.json("error");
@@ -67,7 +70,7 @@ module.exports = (function() {
 		add: function(req, res) { 
 			var check_email_post = {email: req.body.email}
 
-			var post = {first_name: req.body.first_name, last_name: req.body.last_name, email: req.body.email, password: req.body.password, created_at: Date.now(), updated_at: Date.now(), phone: req.body.phone};
+			var post = {first_name: req.body.first_name, last_name: req.body.last_name, email: req.body.email, password: req.body.password, phone: req.body.phone};
 			console.log(post, "post");
 
 			pool.getConnection(function(error, connection) {
@@ -79,7 +82,7 @@ module.exports = (function() {
 						// this is needed for iOS users
 						if (typeof user[0] == 'undefined') {
 							console.log('valid login!!')
-							connection.query("INSERT INTO users SET ?", post, function(error, results) {
+							connection.query("INSERT INTO users SET ?, created_at = NOW(), updated_at = NOW()", post, function(error, results) {
 								if (error) {
 									console.log(error);
 									res.json(error)

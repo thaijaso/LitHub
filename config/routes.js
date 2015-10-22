@@ -17,8 +17,8 @@ module.exports = function(app) {
 	});
 
 	app.post('/loginUser', function(req, res) {
-		console.log('login sdfsdfdsljdslfkj')
 		users.find(req, res);
+		console.log('login #3', res[0]);
 		//setting the req session data
 		// req.session.email = users[0].email
 	});
@@ -45,7 +45,6 @@ module.exports = function(app) {
 
 	// This is for the 'ajax-like' email is unique validation in iOS
 	app.post('/findUser', function(req, res) {
-		console.log(req.body)
 		users.findOne(req,res)
 	});
 

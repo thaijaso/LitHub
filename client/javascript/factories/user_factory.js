@@ -13,12 +13,13 @@ myApp.factory('UserFactory', function ($http) {
 
 	factory.loginUser = function(user, callback) {
 		// console.log('at factory, user: ', user);
-		$http.post('/loginUser', user).success(function (userFound) {
+		$http.post('/loginUser', user).success(function(userFound) {
 			userid = userFound[0].id;
 			// console.log(userFound[0].id);
 			// console.log('made it back from database, userid: ', userFound[0].id);
 			sessionStorage.setItem('sessionID', userFound[0].id);
 			sessionStorage.setItem('sessionName', userFound[0].first_name);
+			sessionStorage.setItem('sessionVendor_status', userFound[0].vendor_status);
 			callback(userFound);
 		});
 	}
@@ -33,7 +34,7 @@ myApp.factory('UserFactory', function ($http) {
 	}
 
 	factory.addUser = function(newUser, callback) {
-		$http.post('/addUser', {first_name: newUser.first_name, last_name: newUser.last_name, email: newUser.email, phone: newUser.phone, password: newUser.password, created_at: Date.now()})
+		$http.post('/addUser', {first_name: newUser.first_name, last_name: newUser.last_name, email: newUser.email, password: newUser.password, phone: newUser.phone})
 		.success(function (userInfo) {
 			// console.log(userInfo);
 			callback(userInfo);

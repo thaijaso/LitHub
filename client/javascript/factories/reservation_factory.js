@@ -47,8 +47,6 @@ myApp.factory('ReservationFactory', function($http) {
 			newOrderAdd.quantity_half = 0;
 			newOrderAdd.quantity_eigth = 0;
 			newOrderAdd.quantity_oz = 0;
-			newOrderAdd.created_at = Date.now();
-			newOrderAdd.updated_at = Date.now();
 			newOrderAdd.status = 0;
 			newOrderAdd.strain_id = strainID;
 		}

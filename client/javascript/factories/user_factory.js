@@ -20,7 +20,7 @@ myApp.factory('UserFactory', function ($http) {
 			sessionStorage.setItem('sessionID', userFound[0].id);
 			sessionStorage.setItem('sessionName', userFound[0].first_name);
 			sessionStorage.setItem('sessionVendor_status', userFound[0].vendor_status);
-			sessionStorage.setItem('sessionVendor_id', userFound[0].vendor_id);
+			sessionStorage.setItem('sessionVendor_id', userFound[0].user_vendor_id);
 			callback(userFound);
 		});
 	}

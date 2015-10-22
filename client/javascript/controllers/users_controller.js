@@ -13,7 +13,7 @@ myApp.controller('UsersController', function ($scope, UserFactory, $location) {
 			$scope.sessionID = userFound[0].id;
 			$scope.sessionName = userFound[0].first_name;
 			$scope.sessionVendor_status = userFound[0].vendor_status;
-			$scope.sessionVendor_id = userFound[0].vendor_id;
+			$scope.sessionVendor_id = userFound[0].user_vendor_id;
 			console.log('fred made it here');
 		});
 	}

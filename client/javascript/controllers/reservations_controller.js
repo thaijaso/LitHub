@@ -22,11 +22,6 @@ myApp.controller('ReservationsController', function ($scope, $location, $routePa
 			$scope.feed_reservations  = reservations;
 	});
 
-// Vendor Dashboard - vendors checking their orders
-	// ReservationFactory.getAllReservations(function(allReservations){
-	// 		$scope.allreservations  = allReservations;
-	// 	});
-
 	$scope.cancelOrder = function(reservationID) {
 		ReservationFactory.cancelOrder(reservationID, function () {
 			ReservationFactory.getReservations(userID, function (reservations) {

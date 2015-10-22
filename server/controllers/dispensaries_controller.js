@@ -11,6 +11,7 @@ var pool = mysql.createPool({
 module.exports = (function() {
 	return {
 		get: function(req, res) {
+			console.log('here');
 			const lngDistancePerDegreeAtEquator = 69.172;
 			const latDistancePerDegreeAtEquator = 69.08558338297732;
 
@@ -22,7 +23,7 @@ module.exports = (function() {
 			if (typeof req.query.radius != "undefined"){
 				maxRadius = req.query.radius;
 			} else {
-				maxRadius = 5;
+				maxRadius = 5000;
 			}
 			if (typeof req.query.lat != "undefined")
 			{

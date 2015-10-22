@@ -1,3 +1,5 @@
+// dont know whats going on with this controller
+
 var mysql = require('mysql');
 var http = require('https');
 
@@ -41,6 +43,7 @@ function getGeocode(address, resid, success, error) {
 module.exports = (function() {
 	return {
 		get: function(req, res) {
+			console.log('here');
 			const lngDistancePerDegreeAtEquator = 69.172
 			const latDistancePerDegreeAtEquator = 69.08558338297732
 			var fromLat = 47.609812;
@@ -50,7 +53,7 @@ module.exports = (function() {
 			if (typeof req.query.radius != 'undefined'){
 				var maxRadius = req.query.radius;
 			} else {
-				var maxRadius = 5;
+				var maxRadius = 5000;
 			}
 			
 console.log("**********************BEGIN***********************************************")

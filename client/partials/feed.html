@@ -6,10 +6,12 @@
 			<div class="col-sm-4 ">
 				<p ng-if="reservation.vendor == 'Green Theory'"><img src="assets/icons/green_theory.png"></p>
 				<p ng-if="reservation.vendor == 'BelMar Bellevue Marijuana Store'"><img src="assets/icons/michael.jpg" class="img-circle"></p>
-				<p ng-if="reservation.vendor == 'Uncle Ike's"><img src="assets/icons/ike.jpg"></p>
+				<p ng-if="reservation.vendor == 'Uncle Ike's"><img src="assets/icons/snoop.jpg"></p>
 			</div>
 			<div class="col-sm-4">
 				<p><b>Strain:</b> {{reservation.name}}</p>
+				<p ng-if="reservation.quantity_gram == 1 "><b>Quantity: </b>{{reservation.quantity_gram}} gram</p>
+				<p ng-if="reservation.quantity_gram > 1 "><b>Quantity: </b>{{reservation.quantity_gram}} grams</p>
 				<p ng-if="reservation.status == 0 "><b>Status:</b> Order not ready</p>
 				<p ng-if="reservation.status == 1 "><b>Status:</b> Ready for pickup</p>
 			</div>

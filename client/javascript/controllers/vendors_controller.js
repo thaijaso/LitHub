@@ -6,8 +6,6 @@ myApp.controller('VendorsController', function ($scope, $location, $routeParams,
 
 	// Vendor Dashboard - vendors checking their orders
 	VendorFactory.getReservations(vendor_id, function (allReservations){
-		console.log("vendor_id", vendor_id);
-		console.log("fred made it to the controller");
 		$scope.allreservations  = allReservations;
 	});
 
@@ -28,4 +26,21 @@ myApp.controller('VendorsController', function ($scope, $location, $routeParams,
 			}
 		}
 	});
+
+	$scope.available = function(reservationID) {
+		VendorFactory.available(reservationID, function () {
+			VendorFactory.getReservations(vendor_id, function (allReservations){
+				$scope.allreservations  = allReservations;
+			});
+		});
+	}
+
+	$scope.unavailable = function(reservationID) {
+		VendorFactory.unavailable(reservationID, function () {
+			VendorFactory.getReservations(vendor_id, function (allReservations){
+				$scope.allreservations  = allReservations;
+			});
+		});
+	}
+
 });

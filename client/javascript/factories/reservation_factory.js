@@ -28,13 +28,6 @@ myApp.factory('ReservationFactory', function($http) {
 	// 	});
 	//   }
 
-	factory.available = function(reservationID, callback) {
-		console.log(reservationID);
-		$http.post('/available', {id: reservationID}).success(function () {
-			callback();
-		});
-	}
-
 	factory.addOrder = function(newOrder, userID, vendorID, strainID, callback) {
 		var newOrderAdd = {};
 		newOrderAdd.user_id = userID;
@@ -52,13 +45,6 @@ myApp.factory('ReservationFactory', function($http) {
 		}
 		
 		$http.post('/addOrder', newOrderAdd).success(function() {
-			callback();
-		});
-	}
-
-	factory.unavailable = function(reservationID, callback) {
-		console.log(reservationID);
-		$http.post('/unavailable', {id: reservationID}).success(function () {
 			callback();
 		});
 	}

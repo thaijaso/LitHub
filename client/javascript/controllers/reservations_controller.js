@@ -19,6 +19,7 @@ myApp.controller('ReservationsController', function ($scope, $location, $routePa
 
 // Feed - users checking their own reservations
 	ReservationFactory.getReservations(userID, function (reservations) {
+		console.log(reservations);
 			$scope.feed_reservations  = reservations;
 	});
 
@@ -35,23 +36,6 @@ myApp.controller('ReservationsController', function ($scope, $location, $routePa
 			$location.path('/feed');
 		});
 	}
-
-	$scope.available = function(reservationID) {
-		ReservationFactory.available(reservationID, function () {
-			ReservationFactory.getAllReservations(function(allReservations){
-				$scope.allreservations  = allReservations;
-			});
-		});
-	}
-
-	$scope.unavailable = function(reservationID) {
-		ReservationFactory.unavailable(reservationID, function () {
-			ReservationFactory.getAllReservations(function(allReservations){
-				$scope.allreservations  = allReservations;
-			});
-		});
-	}
-
 	});
 
 	// $scope.addQuestion = function() {

@@ -18,7 +18,6 @@ module.exports = function(app) {
 
 	app.post('/loginUser', function(req, res) {
 		users.find(req, res);
-		console.log('login #3', res[0]);
 		//setting the req session data
 		// req.session.email = users[0].email
 	});
@@ -82,11 +81,11 @@ module.exports = function(app) {
 	});
 
 	app.post('/available', function(req, res) {
-		reservations.available(req, res);
+		vendors.available(req, res);
 	});
 
 	app.post('/unavailable', function(req, res) {
-		reservations.unavailable(req, res);
+		vendors.unavailable(req, res);
 	});
 
 }

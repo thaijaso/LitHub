@@ -6,7 +6,6 @@ myApp.factory('VendorFactory', function ($http) {
 	}
 
 	factory.returnVendor_id = function(callback) {
-		console.log(vendor_id);
 		callback(vendor_id);
 	}
 
@@ -16,14 +15,23 @@ myApp.factory('VendorFactory', function ($http) {
 		});
 	}
 	
-
 	factory.getReservations = function(vendorID, callback) {
-		console.log("fred made it to the factory", vendorID);
 		$http.post('/getVendorReservations/' + vendorID).success(function (allReservations) {
-			console.log('fred made it inside the factory', allReservations);
 			callback(allReservations);
 		});
 	  }
+
+	factory.unavailable = function(reservationID, callback) {
+		$http.post('/unavailable', {id: reservationID}).success(function () {
+			callback();
+		});
+	}
+
+	factory.available = function(reservationID, callback) {
+		$http.post('/available', {id: reservationID}).success(function () {
+			callback();
+		});
+	}
 
 	return factory;
 });

@@ -1,4 +1,15 @@
-myApp.controller('VendorsController', function ($scope, VendorFactory, $location, $routeParams) {
+myApp.controller('VendorsController', function ($scope, $location, $routeParams, VendorFactory, UserFactory) {
+
+	VendorFactory.returnVendor_id(function(data){
+		vendor_id = data;
+	});
+
+	// Vendor Dashboard - vendors checking their orders
+	VendorFactory.getReservations(vendor_id, function (allReservations){
+		console.log("vendor_id", vendor_id);
+		console.log("fred made it to the controller");
+		$scope.allreservations  = allReservations;
+	});
 
 	VendorFactory.getMenu($routeParams.id, function (menu) {
 		$scope.indicas = [];

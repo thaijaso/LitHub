@@ -66,7 +66,7 @@
                             <td ng-if="reservation.status == 1 ">Ready for pickup</td>
                         <td> -->
                             
-    						<li ng-if="sessionVendor_status == 1"><a href="#/vendors_dashboard">Vendor Dashboard</a></li>
+    						<li ng-if="sessionVendor_status == 1"><a href="#/vendors_dashboard/{{sessionVendor_id}}">Vendor Dashboard</a></li>
     						<li><a href="#">Smokydex</a></li>
                             <li><a href="#" ng-click="logout()">Sign out</a></li>
     					</ul>

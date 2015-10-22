@@ -48,7 +48,7 @@ myApp.controller('MapsController', function ($scope, MapFactory, $location, $rou
 	];
 
 	MapFactory.getCoords(function (dispensaries){
-		console.log('in the front end, here is the data', dispensaries.data);
+		// console.log('in the front end, here is the data', dispensaries.data);
 		for (var i = 0; i < dispensaries.data.length; i++) {
 			var vendorID = dispensaries.data[i].id;
 			var tradeName = dispensaries.data[i].Tradename;
@@ -57,8 +57,8 @@ myApp.controller('MapsController', function ($scope, MapFactory, $location, $rou
 				id: dispensaries.data[i].id,
 				coords: {latitude: dispensaries.data[i].lat, longitude: dispensaries.data[i].lng },
 				click: function(marker, id) {
-					console.log('Returned array of markers: ', marker)
-					console.log('maybe the id: ', id)
+					// console.log('Returned array of markers: ', marker)
+					// console.log('maybe the id: ', id)
 					
 					$scope.$apply(function() {
 						$location.path('/vendor/' + id);

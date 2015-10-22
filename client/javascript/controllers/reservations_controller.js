@@ -15,15 +15,17 @@ myApp.controller('ReservationsController', function ($scope, $location, $routePa
 
 	UserFactory.returnUser(function(data){
 			userID = data;
-		});
+	});
 
+// Feed - users checking their own reservations
 	ReservationFactory.getReservations(userID, function (reservations) {
 			$scope.feed_reservations  = reservations;
-		});
+	});
 
-	ReservationFactory.getAllReservations(function(allReservations){
-			$scope.allreservations  = allReservations;
-		});
+// Vendor Dashboard - vendors checking their orders
+	// ReservationFactory.getAllReservations(function(allReservations){
+	// 		$scope.allreservations  = allReservations;
+	// 	});
 
 	$scope.cancelOrder = function(reservationID) {
 		ReservationFactory.cancelOrder(reservationID, function () {

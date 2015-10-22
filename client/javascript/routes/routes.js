@@ -23,7 +23,7 @@ myApp.config(function ($routeProvider, uiGmapGoogleMapApiProvider) {
 		.when('/vendor', {
 			templateUrl: 'partials/vendor.html'
 		})
-		.when('/vendors_dashboard', {
+		.when('/vendors_dashboard/:id', {
 			templateUrl: 'partials/vendors_dashboard.html'
 		})
 

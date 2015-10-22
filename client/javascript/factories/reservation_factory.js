@@ -22,11 +22,11 @@ myApp.factory('ReservationFactory', function($http) {
 		});
 	}
 
-	factory.getAllReservations = function(callback) {
-		$http.get('/getAllReservations').success(function (allReservations) {
-			callback(allReservations);
-		});
-	  }
+	// factory.getAllReservations = function(callback) {
+	// 	$http.get('/getAllReservations').success(function (allReservations) {
+	// 		callback(allReservations);
+	// 	});
+	//   }
 
 	factory.available = function(reservationID, callback) {
 		console.log(reservationID);

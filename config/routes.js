@@ -52,8 +52,8 @@ module.exports = function(app) {
 		reservations.retrieve(req, res);
 	});
 
-	app.get('/getAllReservations', function(req, res) {
-		reservations.getAll(req, res);
+	app.post('/getVendorReservations/:id', function(req, res) {
+		vendors.getReservations(req, res);
 	});
 
 	app.get('/getMenu/:id', function(req, res) {

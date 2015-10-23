@@ -134,3 +134,58 @@ a:link {
 	margin-top: 100px;
 }
 
+/*vendor Dashboard*/
+
+#newReservations {
+	text-align: center;
+	outline: dotted 1px red;
+	width: 400px;
+	height: 200px;
+}
+	.newReservations-header{
+		margin-bottom: 5px;
+		border-bottom: 1px solid black;
+	}
+	.ordersBox{
+		height: 80px;
+		/*outline: dotted 1px green;*/
+	}
+	.user-Order_id{
+		display: inline-block;
+		/*outline: dotted 1px red;*/
+		height: 80px;
+		width: 60px;
+		vertical-align: top;
+		padding-top: 10px;
+	}
+	.ordersTable{
+		width:240px;
+		height: 75px;
+		display: inline-block;
+		/*outline: dotted 1px purple;*/
+		padding-top: 10px;
+	}
+		td{
+			text-align: left;
+			font-size: 11px;
+		}
+		.ordersWeight {
+			padding-left: 30px;
+		}
+		.ordersName{
+			padding-left: 20px;
+		}
+	.ordersButton{
+		display: inline-block;
+	}
+		.yesButton{
+			vertical-align: bottom;
+			height: 80px;
+			width: 40px;
+		}
+		.noButton{
+			vertical-align: bottom;
+			height: 80px;
+			width: 40px;
+		}
+	

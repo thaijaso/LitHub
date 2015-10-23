@@ -11,6 +11,14 @@
 				<p><b>Strain:</b> {{reservation.name}}</p>
 				<p ng-if="reservation.quantity_gram == 1 "><b>Quantity: </b>{{reservation.quantity_gram}} gram</p>
 				<p ng-if="reservation.quantity_gram > 1 "><b>Quantity: </b>{{reservation.quantity_gram}} grams</p>
+				<p ng-if="reservation.quantity_eigth == 1 "><b>Quantity: </b>{{reservation.quantity_eigth}} eigth</p>
+				<p ng-if="reservation.quantity_eigth > 1 "><b>Quantity: </b>{{reservation.quantity_eigth}} eigths</p>
+				<p ng-if="reservation.quantity_quarter == 1 "><b>Quantity: </b>{{reservation.quantity_quarter}} quarter</p>
+				<p ng-if="reservation.quantity_quarter > 1 "><b>Quantity: </b>{{reservation.quantity_quarter}} quarters</p>
+				<p ng-if="reservation.quantity_half == 1 "><b>Quantity: </b>{{reservation.quantity_half}} half</p>
+				<p ng-if="reservation.quantity_half > 1 "><b>Quantity: </b>{{reservation.quantity_half}} halves</p>
+				<p ng-if="reservation.quantity_oz == 1 "><b>Quantity: </b>{{reservation.quantity_oz}} ounce</p>
+				<p ng-if="reservation.quantity_oz > 1 "><b>Quantity: </b>{{reservation.quantity_oz}} ounces</p>
 				<p ng-if="reservation.status == 0 "><b>Status:</b> Order not ready</p>
 				<p ng-if="reservation.status == 1 "><b>Status:</b> Ready for pickup</p>
 			</div>

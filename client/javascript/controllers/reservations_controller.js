@@ -2,7 +2,6 @@ myApp.controller('ReservationsController', function ($scope, $location, $routePa
 	
 	// when user opens up vendor and strain, runs this get automatically
 	ReservationFactory.getItem($routeParams.vendor_id, $routeParams.strain_id, function (item){
-		console.log(item);
 		$scope.name = item[0].vendor_name;
 		$scope.vendorID = item[0].vendor_id;
 		$scope.strainName = item[0].strain_name;

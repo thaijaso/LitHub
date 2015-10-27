@@ -1,0 +1,144 @@
+*************** Begin Copy here and send to chris@founderscoop.com ***************
+
+Please list your company’s name, URL (if any) and phone number (preferably cell). What does your company do?
+
+	Company Name: Lithub
+	URL         : www.getlithub.com
+	Phone       : (503) 481-8152
+
+	We have created a SaaS product that allows marijuana retailers to accept reservations for pick up and payment in-store. This platform also facilitates customer loyalty and provides the retail store with key analytics about their customers purchasing behaviours.  
+
+What’s new about what you’re doing?
+	
+	Currently, marijuana retailers have to deal with long lines and generally have no way of tracking their customer's purchases. Our platform solves this by providing a two-fold solution.
+
+What do you understand about your business that other companies don’t?
+	
+	We have familiarity with our local market in Washington state and the laws surrounding the purchase of marijuana products. In addition to this, we have spoken with marijuana retailers in the area to understand their pain-points in running their businesses.
+
+How will you acquire customers?
+
+	Our customer aquisition strategy is multi-faceted. To date, we have been approached by two marijuana retailers in the Seattle and Tacoma areas that have displayed interest in beta-testing our app. We received this interest by attending local marijuana tech meetups and talking to marijuana retail managers and owners about our product and demoing it for them.
+
+How will you make money?
+
+	We will charge a monthly subscription for our software
+
+Who are your competitors, and who might become competitors?
+
+	Current competitors on the market with a live product: 
+		Baker (trybaker.com) - 
+			Baker currently operates in Colorado, California, and Oregon with plans for exapansion. However, they do not currently have a native application for mobile devices and do not (currently) provide analytics for their clients.
+	Future competitors:
+		GreenBits (greenbits.com) - 
+			GreenBits provides an all-in-one POS solution for marijuana retailers. They have expressed interest in adding customer loyalty features.
+
+If your project is software, what development stack will you use?
+
+	We currently use the MEAN stack for our website. For our mobile app, we are using Xcode and Swift along with various libraries. Our express.js API powers our mobile app as well. 
+
+If you’ve already started working on it, how long have you been at it?
+	
+	We have been developing since June 2015.
+
+If you have an online demo, what’s the URL?
+
+	www.getlithub.com (STILL UNDER CONSTRUCTION, OUR PRIMARY DEVELOPMENT FOCUS IS MOBILE CURRENTLY)
+
+How long will it take before you have a prototype? A beta? A version you can charge for?
+
+	We are currently iterating from a prototype to our beta version. We are planning on launching our beta for free with a maximum of 5 retail locations. We have not yet set a date for our official launch out of beta.
+
+Why would your idea be hard for someone else to duplicate?
+
+	Not necessarily, however our goal is to target the largest drivers of revenue within the state first (Uncle Ike's). They have already expressed interest in meeting and beta testing our application. We are in the process of setting up a meeting. 
+
+	Our goal is to set up agreements with the biggest retailers before any potential competition can.
+
+What are the biggest unknowns or risks in your idea (what keeps you up at night)?
+
+	Our biggest unknowns are currently (in no particular order):
+		- Pricing the product
+		- How our application will run under a heavy user load
+		- Competitors coming to the market before us
+
+For each founder, please list: name, age, school, degree, email address, personal URL (if any); and present employer and title (if any)
+
+	Founder 1:
+		Name: Vikash Loomba
+		Age: 19
+		School: Bellevue College
+		Degree: Computer Science
+		Email: me@vikashloomba.com
+		URL: vikashloomba.github.io
+
+	Founder 2:
+		Name: Jason Thai
+		Age: 
+		School: University of Washington (Tacoma)
+		Degree: Computer Science
+		URL:
+
+	Founder 3:
+		Name: Frederick Choe
+		Age:
+		School: University of Washington (Bothell)
+		Degree: Computer Science
+		Email: frederickchoe@gmail.com
+		URL:
+
+	Founder 4: 
+		Name: Alex Farmer
+		Age:
+		School: University of Washington 
+		Degree: Communications
+		Email:
+		URL:
+
+What products or companies have any of you built before? (Include URLs if possible)
+
+	None
+
+How long have the founders known one another and how did you meet?
+
+	Vikash (myself), Jason, and Frederick all met at Coding Dojo, a coding bootcamp in Bellevue and originally founded in Silicon Valley. We each worked together on lithub as our final project, and upon graduating Coding Dojo we decided to pursue the business opportunity. Alex is a friend of ours who is assisting with marketing, sales, and business development.
+
+If you’re already incorporated, when were you? Who are the shareholders and what percent does each own?
+
+	Incorporated as an LLC in October. Each of the four founders owns 25% equity. 
+
+If you’ve previously received funding, how much did you take and at what valuation(s)?
+
+	No current funding.
+
+If you’re not incorporated yet, please list the percent of the company you plan to give each founder, and to anyone else (advisors, etc.).
+
+If you expect to have any major expenses beyond salary, hosting and development tools, what will they be?
+
+How long do you expect to work on this idea?
+
+	As long as we have a product and willing market, we will be working on it.
+
+Do any founders have other commitments for the next 12 months?
+
+	School is the primary commitment for all the current founders. 
+
+Are any of the founders covered by noncompetes or intellectual property agreements that overlap with your project?
+
+	N/A
+
+Was any of your code written by someone who is not one of your founders? If so, do you have the right to use it? (Open source is OK)
+
+	YES. All the code written by others for our project is currently on github and available open source. There are three contributors other than the founders.
+
+Please share one personal fact about each founder that helps us understand who you are as a person.
+
+	Vikash: 
+	
+		I dropped out of school due to my own frustrations with the education system and decided to join Coding Dojo to learn development in practice rather than the theory that is generally taught in schools. Since graduating, I have decided to go back to school because I know I can complete a Computer Science degree with my knowledge gained in Coding Dojo. I come from a family of entreprenuers, so starting a company with an idea that had real potential seemed natural.
+
+	Jason: 
+
+	Fred:
+
+	Alex:

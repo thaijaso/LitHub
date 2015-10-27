@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute', 'uiGmapgoogle-maps', 'angular-loading-bar', 'ngSanitize']);
+var myApp = angular.module('myApp', ['ngRoute', 'uiGmapgoogle-maps', 'angular-loading-bar', 'ngSanitize', 'chart.js']);
 
 myApp.config(function ($routeProvider, uiGmapGoogleMapApiProvider) {
 	$routeProvider
@@ -25,6 +25,9 @@ myApp.config(function ($routeProvider, uiGmapGoogleMapApiProvider) {
 		})
 		.when('/vendors_dashboard/:id', {
 			templateUrl: 'partials/vendors_dashboard.html'
+		})
+		.when('/vendors_dashboard/:id/analytics', {
+			templateUrl: 'partials/vendors_analytics.html'
 		})
 
 	uiGmapGoogleMapApiProvider.configure({

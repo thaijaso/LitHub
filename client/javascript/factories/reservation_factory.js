@@ -3,12 +3,12 @@ myApp.factory('ReservationFactory', function($http) {
 	var factoryItem;
 
 	// this is run automatically when user goes to vendor and strains
-	factory.getItem = function(vendorID, strainID, callback) {
-		$http.get('/getItem/' + vendorID + "/" + strainID).success(function (item) {
-			factoryItem = item;
-			callback(factoryItem);
-		});
-	}
+	// factory.getItem = function(vendorID, strainID, callback) {
+	// 	$http.get('/getItem/' + vendorID + "/" + strainID).success(function (item) {
+	// 		factoryItem = item;
+	// 		callback(factoryItem);
+	// 	});
+	// }
 
 	factory.getReservations = function(userID, callback) {
 		$http.post('/getReservations', {id: userID}).success(function (reservations) {

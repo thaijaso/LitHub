@@ -1,4 +1,5 @@
 var strains = require('./../server/controllers/strains_controller');
+var straindetails = require('./../server/controllers/strain_details_controller');
 var users = require('./../server/controllers/users_controller');
 var reservations = require('./../server/controllers/reservations_controller');
 var vendors = require('./../server/controllers/vendors_controller');
@@ -77,7 +78,7 @@ module.exports = function(app) {
 	});
 
 	app.get('/getItem/:vendorID/:strainID', function(req, res) {
-		reservations.getItem(req, res);
+		straindetails.getItem(req, res);
 	});
 
 	app.post('/available', function(req, res) {

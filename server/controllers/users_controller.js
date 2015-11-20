@@ -29,7 +29,7 @@ module.exports = (function() {
 							req.session.user_id = user[0].id;
 							req.session.vendor_status = user[0].vendor_status;
 							req.session.vendor_id = user[0].user_vendor_id;
-							console.log('this is the session stuff:', req.session);
+							//console.log('this is the session stuff:', req.session);
 							res.json(user);
 						} else {
 							// again, this error stuff is for iOS. The iOS app will crash if it sends that request and gets nil back. it needs a value.

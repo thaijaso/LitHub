@@ -1,12 +1,15 @@
+
+
+
 myApp.controller('ReservationsController', function ($scope, $location, $routeParams, ReservationFactory, UserFactory) {
 
 	UserFactory.returnUser(function(data){
 			userID = data;
 	});
 
-// Feed - users checking their own reservations
+	// Feed - users checking their own reservations
 	ReservationFactory.getReservations(userID, function (reservations) {
-		console.log(reservations);
+		//console.log(reservations);
 			$scope.feed_reservations  = reservations;
 	});
 
@@ -23,4 +26,4 @@ myApp.controller('ReservationsController', function ($scope, $location, $routePa
 			$location.path('/feed');
 		});
 	}
-	});
+});

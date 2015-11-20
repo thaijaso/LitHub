@@ -1,4 +1,12 @@
-var myApp = angular.module('myApp', ['ngRoute', 'uiGmapgoogle-maps', 'angular-loading-bar', 'ngSanitize', 'chart.js']);
+var myApp = angular.module('myApp', ['ngRoute', 'uiGmapgoogle-maps', 'angular-loading-bar', 'ngSanitize', 'chart.js', 'btford.socket-io']);
+
+myApp.factory('Socket', function (socketFactory) {
+	return socketFactory({
+    	ioSocket: socket.connect('../controllers/vendors_controller.js')
+  	});
+});
+
+
 
 myApp.config(function ($routeProvider, uiGmapGoogleMapApiProvider) {
 	$routeProvider
@@ -39,3 +47,4 @@ myApp.config(function ($routeProvider, uiGmapGoogleMapApiProvider) {
 myApp.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeSpinner = false;
 }]);
+

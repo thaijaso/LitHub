@@ -1,8 +1,12 @@
+//require('../javascript/angular-socket-io-master/socket.js');
+
+
 myApp.factory('UserFactory', function ($http) {
 	var factory = {};
-	var userid;
+	var userID;
+	
 	if (sessionStorage.getItem('sessionID') != undefined) {
-		userid = sessionStorage.getItem('sessionID');
+		userID = sessionStorage.getItem('sessionID');
 	}
 	
 	factory.checkSession = function(callback) {
@@ -14,13 +18,33 @@ myApp.factory('UserFactory', function ($http) {
 	factory.loginUser = function(user, callback) {
 		// console.log('at factory, user: ', user);
 		$http.post('/loginUser', user).success(function(userFound) {
-			userid = userFound[0].id;
+			userID = userFound[0].id;
+			console.log(userFound[0]);
+
+	     	var vendorID;
+	     	if (userFound[0].vendor_status) {
+	     		console.log(userFound[0].user_vendor_id);
+	     		vendorID = userFound[0].user_vendor_id;
+
+	     	}
+            //console.log(socket);
+            var userData = {"userID": userID, "vendorID": vendorID};
+            socket.emit("UserLoggedIn", userData);
+            
+            
+	        console.log('here');
+	        //$http.post('/userAuth', {userid: })
 			// console.log(userFound[0].id);
 			// console.log('made it back from database, userid: ', userFound[0].id);
 			sessionStorage.setItem('sessionID', userFound[0].id);
 			sessionStorage.setItem('sessionName', userFound[0].first_name);
 			sessionStorage.setItem('sessionVendor_status', userFound[0].vendor_status);
 			sessionStorage.setItem('sessionVendor_id', userFound[0].user_vendor_id);
+
+
+
+			//$http.post('/userAuth', )
+
 			callback(userFound);
 		});
 	}
@@ -31,7 +55,7 @@ myApp.factory('UserFactory', function ($http) {
 	}
 
 	factory.returnUser = function(callback) {
-		callback(userid);
+		callback(userID);
 	}
 
 	factory.addUser = function(newUser, callback) {

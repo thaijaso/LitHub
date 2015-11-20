@@ -12,7 +12,7 @@ module.exports = (function() {
 	return {
 		
 		retrieve: function(req, res) {
-			console.log("this is req.body.id", req.body.id)
+			//console.log("this is req.body.id", req.body.id)
 			pool.getConnection(function(err, connection) {
 				//connection.query("SELECT * FROM reservations WHERE ")
 				connection.query("SELECT users.first_name, users.last_name, vendors.name as vendor, vendors_has_strains.price_gram, vendors_has_strains.price_eigth, vendors_has_strains.price_quarter, vendors_has_strains.price_half, vendors_has_strains.price_oz, reservations.quantity_gram, reservations.quantity_eigth, reservations.quantity_quarter, reservations.quantity_half, reservations.quantity_oz, strains.name, strains.category, reservations.status, reservations.id, reservations.strain_id, reservations.vendor_id, reservations.created_at, reservations.updated_at FROM reservations JOIN users ON users.id = reservations.user_id JOIN vendors ON vendors.id = reservations.vendor_id JOIN vendors_has_strains ON vendors_has_strains.strain_id = reservations.strain_id AND vendors_has_strains.vendor_id = reservations.vendor_id JOIN strains ON strains.id = vendors_has_strains.strain_id WHERE reservations.user_id = " + "'" + req.body.id + ";'",
@@ -22,7 +22,7 @@ module.exports = (function() {
 						console.log(error);
 					} else {
 						//console.log(reservations)
-						console.log(reservations);
+						//console.log(reservations);
 						res.json(reservations);
 					}
 				});
@@ -69,7 +69,25 @@ module.exports = (function() {
 				});
 				connection.release();
 			});
+		},
+
+		getUserID: function(req, res) {
+			console.log("in reserv control, this is resrv id", req.body.reservationId);
+			pool.getConnection(function(err, connection) {
+				connection.query("SELECT user_id FROM reservations WHERE reservations.id = " + "'" + req.body.reservationId + "'", function(error, userId, fields){
+					if (error) {
+						console.log(error);
+					} else {
+						res.json(userId);
+					}
+				});
+				connection.release();
+			});
 		}
+
+		
+
+
 
 		// getItem: function(req, res) {
 		// 	pool.getConnection(function(err, connection) {

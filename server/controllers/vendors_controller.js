@@ -44,6 +44,7 @@ module.exports = (function() {
 					if (error) {
 						console.log(error);
 					} else {
+						//console.log("this is the fields: ", fields);
 						res.json({});
 					}
 				});
@@ -63,6 +64,21 @@ module.exports = (function() {
 				});
 				connection.release();
 			});
+		},
+
+		pickedUp: function(req, res) {
+			pool.getConnection(function(err, connection) {
+				connection.query("UPDATE reservations SET status = 2 WHERE id = " + "'" + req.body.reservationId + "'", function(error, reservations, fields) {
+					if (error) {
+						console.log(error);
+					} else {
+						res.send("user picked up items");
+					}
+				});
+				connection.release();
+			});
 		}
+
+
 	}
 })();

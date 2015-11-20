@@ -1,4 +1,11 @@
-myApp.controller('VendorsController', function ($scope, $location, $routeParams, VendorFactory, UserFactory) {
+myApp.controller('VendorsController', function ($scope, $location, $routeParams, VendorFactory, UserFactory, Socket) {
+
+	Socket.on('UpdateReservations', function() {
+		console.log('sockets are success!');
+		VendorFactory.getReservations(vendor_id, function (allReservations){
+			$scope.allreservations  = allReservations;
+		});
+	});
 
     $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
   	$scope.series = ['Series A', 'Series B'];
@@ -7,7 +14,7 @@ myApp.controller('VendorsController', function ($scope, $location, $routeParams,
     	[28, 48, 40, 19, 86, 27, 90]
   	];
   	$scope.onClick = function (points, evt) {
-    	console.log(points, evt);
+    	//console.log(points, evt);
   	};
 
 
@@ -29,26 +36,33 @@ myApp.controller('VendorsController', function ($scope, $location, $routeParams,
 		for (var i = 0; i < menu.length; i++) {
 			if (menu[i].category == "Indica") {
 				$scope.indicas.push(menu[i]);
-				console.log('pushed indica')
+				//console.log('pushed indica')
 			}
 			if (menu[i].category == "Sativa") {
 				$scope.sativas.push(menu[i]);
-				console.log('pushed sativas')
+				//console.log('pushed sativas')
 			}
 			if (menu[i].category == "Hybrid") {
 				$scope.hybrids.push(menu[i]);
-				console.log('pushed hybrid')
+				//console.log('pushed hybrid')
 			}
 		}
-		console.log('Here is the count of the sativas: ', $scope.sativas.count)
-		console.log('Here is the count of the indicas: ', $scope.indicas.count)
-		console.log('Here is the count of the hybrids: ', $scope.hybrids.count)
+		//console.log('Here is the count of the sativas: ', $scope.sativas.count)
+		//console.log('Here is the count of the indicas: ', $scope.indicas.count)
+		//console.log('Here is the count of the hybrids: ', $scope.hybrids.count)
 	});
 
 	$scope.available = function(reservationID) {
+		console.log(reservationID);
 		VendorFactory.available(reservationID, function () {
 			VendorFactory.getReservations(vendor_id, function (allReservations){
 				$scope.allreservations  = allReservations;
+				VendorFactory.getUserIdForReservation(reservationID, function (userId) {
+					console.log("this is the userID", userId[0].user_id);
+					Socket.emit("MakeAvailable", userId[0].user_id);
+				});
+				
+
 			});
 		});
 	}
@@ -60,5 +74,36 @@ myApp.controller('VendorsController', function ($scope, $location, $routeParams,
 			});
 		});
 	}
+
+	$scope.pickedUp = function(reservationId) {
+		//console.log(reservationId);
+		VendorFactory.pickedUp(reservationId, function () {
+			//do something to picked up reservation on front end...
+			VendorFactory.getReservations(vendor_id, function (allReservations) {
+				console.log(allReservations);
+				$scope.allreservations = allReservations;
+				VendorFactory.getUserIdForReservation(reservationId, function (userId) {
+					console.log("this is the userId: ", userId);
+					Socket.emit("PickedUp", userId[0].user_id);
+				});
+
+			});
+			//$scope.allreservations = allReservations;
+		});
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 });

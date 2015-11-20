@@ -33,5 +33,19 @@ myApp.factory('VendorFactory', function ($http) {
 		});
 	}
 
+	factory.getUserIdForReservation = function(reservationId, callback) {
+		//console.log(reservationId);
+		$http.post('/getUserIdForReservation', {reservationId: reservationId}).success(function (userId) {
+			callback(userId);
+		});
+	}
+
+	factory.pickedUp = function(reservationId, callback) {
+		//console.log(reservationId);
+		$http.post('/reservationPickedUp', {reservationId: reservationId}).success(function () {
+			callback();
+		});
+	}
+
 	return factory;
 });

@@ -5,7 +5,7 @@ var reservations = require('./../server/controllers/reservations_controller');
 var vendors = require('./../server/controllers/vendors_controller');
 var dispensaries = require('./../server/controllers/dispensaries_controller');
 
-var session = require('express-session');
+//var session = require('express-session');
 
 module.exports = function(app) {
 	
@@ -18,9 +18,8 @@ module.exports = function(app) {
 	});
 
 	app.post('/loginUser', function(req, res) {
+		console.log(req.session);
 		users.find(req, res);
-		//setting the req session data
-		// req.session.email = users[0].email
 	});
 
 	// This is a logout function for iOS users who must use express session
@@ -89,4 +88,20 @@ module.exports = function(app) {
 		vendors.unavailable(req, res);
 	});
 
+	app.post('/getUserIdForReservation', function(req, res) {
+		reservations.getUserID(req, res);
+	});
+
+	app.post('/reservationPickedUp', function(req, res) {
+		vendors.pickedUp(req, res);
+	});
 }
+
+
+
+
+
+
+
+
+

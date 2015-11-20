@@ -30,9 +30,11 @@
 				<td>total</td>
 					<td ng-if="reservation.status == 0 ">Order not ready</td>
 					<td ng-if="reservation.status == 1 ">Ready for pickup</td>
+					<td ng-if="reservation.status == 2 ">Order picked up</td>
 				<td>
 					<button type="button" class="btn btn-success" ng-click="available(reservation.id)">Make Available</button>
 					<button type="button" class="btn btn-danger" ng-click="unavailable(reservation.id)">Not Yet Ready</button>
+					<button type="button" class="btn btn-primary" ng-click="pickedUp(reservation.id)">Picked Up</button>
 				</td>
 		</table>
 	</div>

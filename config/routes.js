@@ -25,7 +25,7 @@ module.exports = function(app) {
 	// This is a logout function for iOS users who must use express session
 	app.post('/logoutUser', function(req, res){
 		req.session.destroy()
-	})
+	});
 
 	// This is a function to check which user is logged in. For now this is only used for iOS.
 	app.get('/currentUser', function(req, res) {
@@ -35,7 +35,7 @@ module.exports = function(app) {
 		}
 		console.log('routes session var: ', req.session);
 		res.json(jsonObject)
-	})
+	});
 	
 	app.post('/addUser', function(req, res) {
 		console.log(req.body, "adding user")
@@ -73,7 +73,12 @@ module.exports = function(app) {
 
 	app.post('/addOrder', function(req, res) {
 		console.log(req.body)
-		reservations.add(req, res)
+		reservations.add(req, res);
+	});
+
+	app.post('/orderComplete', function(req, res) {
+		console.log("request to complete order")
+		reservations.complete(req, res);
 	});
 
 	app.get('/getItem/:vendorID/:strainID', function(req, res) {
@@ -95,6 +100,7 @@ module.exports = function(app) {
 	app.post('/reservationPickedUp', function(req, res) {
 		vendors.pickedUp(req, res);
 	});
+
 }
 
 

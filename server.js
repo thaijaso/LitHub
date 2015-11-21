@@ -51,7 +51,7 @@ io.sockets.on('connection', function (socket) {
 		clients[socket.id] = {"loggedIn": false, "userID": null, "vendorID": null};
 		
         socket.on('UserLoggedIn', function (userData) {
-            //console.log(userData);
+            console.log(userData);
             //console.log(socket.id);
             //this might take a while if hella niggas are on
             for (key in clients) {
@@ -107,6 +107,17 @@ io.sockets.on('connection', function (socket) {
                     console.log("user found at key, ", key);
                     var socketId = key;
                     io.to(socketId).emit("PickedUp");
+                }
+            }
+        });
+
+        socket.on('OrderCompleted', function (vendorId) {
+            console.log('server: user completed order');
+            for (key in clients) {
+                if (clients[key].vendorID == vendorId) {
+                    console.log("vendor found at key, ", key);
+                    var socketId = key;
+                    io.to(socketId).emit("UpdateReservations");
                 }
             }
         });

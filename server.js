@@ -3,29 +3,35 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
 var session = require('express-session');
-
 var app = express();
 
-// //Hardcorded device token
-// var token = "d31b8d0c47b9d1964f3903444e6280004de61f8b5abd468220716c22ccf87db0";
 
-// var apns = require("apns"), options, connection, notification;
- 
-// options = {
-//    keyFile : "./config/key.pem",
-//    certFile : "./config/cert.pem",
-//    debug : true
-// };
- 
-// connection = new apns.Connection(options);
- 
-// notification = new apns.Notification();
-// notification.device = new apns.Device(token);
-// notification.alert = "Hello World !";
- 
-// connection.sendNotification(notification);
+var Parse = require('parse/node').Parse;
 
-//End notifications
+Parse.initialize("RWaJpkpPlTsVYwv6i8f0X0qJIKyEfHw8oGwxEERU", "jVpYXcdktcJ0iw8xVDJGx86BL4sLP5rbtkfvOvto");
+
+//Jason's device token
+//517e52af6bb639b207d530c54aa9cc55a9d46ab098ac05f25a55147acbfe098a
+var query = new Parse.Query(Parse.Installation);
+query.equalTo("deviceToken", "517e52af6bb639b207d530c54aa9cc55a9d46ab098ac05f25a55147acbfe098a");
+
+
+
+Parse.Push.send({
+    where: query,
+    data: {
+        alert: "this one is working"
+    }
+}, {
+    success: function() {
+        // Push was successful
+        console.log("push was succesful");
+    },
+    error: function(error) {
+        console.log(error);
+    }
+});
+
 
 //global
 app.use(bodyParser.urlencoded());
@@ -48,7 +54,7 @@ var clients = {};
 io.sockets.on('connection', function (socket) {
 	//console.log('SERVER::WE ARE USING SOCKETS!');
 		console.log("socketId:", socket.id);
-		clients[socket.id] = {"loggedIn": false, "userID": null, "vendorID": null};
+		clients[socket.id] = {"loggedIn": false, "userID": null, "vendorID": null, "deviceToken": null};
 		
         socket.on('UserLoggedIn', function (userData) {
             console.log(userData);
@@ -60,6 +66,7 @@ io.sockets.on('connection', function (socket) {
                     clients[key].loggedIn = true;
                     clients[key].userID = userData.userID;
                     clients[key].vendorID = userData.vendorID;
+                    clients[key].deviceToken = userData.deviceToken;
 
                 }
             }
@@ -86,17 +93,42 @@ io.sockets.on('connection', function (socket) {
 		});
 
 		socket.on('MakeAvailable', function (userId) {
-			console.log('server:: vendor made it available');
-			console.log('userId:', userId);
+			//console.log('server:: vendor made it available');
+			//console.log('userId:', userId);
 			for (key in clients) {
                 if (clients[key].userID == userId) {
-                    console.log("user found at key, ", key);
+                    //console.log("user found at key, ", key);
                     var socketId = key;
                     io.to(socketId).emit("MadeAvailable");
+                    // var query = new Parse.Query(Parse.Installation);
+                    // query.equalTo("deviceToken", "517e52af6bb639b207d530c54aa9cc55a9d46ab098ac05f25a55147acbfe098a");
+
+ 
+                    // console.log("attempting to send push notification");
+                    // //send push notification
+                    // var deviceToken = clients[key].deviceToken;
+                    // console.log("this is the deviceToken: ", deviceToken);
+                    
+                    // var query = new Parse.Query(Parse.Installation);
+                    // query.equalTo("deviceToken", "517e52af6bb639b207d530c54aa9cc55a9d46ab098ac05f25a55147acbfe098a");
+
+
+                    // Parse.Push.send({
+                    //     where: query,
+                    //     data: {
+                    //         alert: "this one isn't working"
+                    //     }
+                    // }, {
+                    //     success: function() {
+                    //         // Push was successful
+                    //         console.log("push was succesful");
+                    //     },
+                    //     error: function(error) {
+                    //         console.log(error);
+                    //     }
+                    // });
                 }
             }
-
-            //io.to(socketid).emit('message', 'for your eyes only');
 		});
 
         socket.on('PickedUp', function (userId) {

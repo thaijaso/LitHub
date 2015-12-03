@@ -2,8 +2,7 @@
 <html ng-app='myApp'>
 <head>
 	<title>LitHub | Virtual Dispensaries</title>
-	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/stylesheets/styles.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/loading-bar.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/angular-chart.css">
     <!-- glyphicons -->
@@ -34,9 +33,9 @@
     <script type="text/javascript" src="/javascript/controllers/vendors_controller.js"></script>
     <script type="text/javascript" src="/javascript/factories/strain_detail_factory.js"></script>
     <script type="text/javascript" src="/javascript/controllers/strain_details_controller.js"></script>
+    <!-- graph -->
     <script type="text/javascript" src="/javascript/Chart.min.js"></script>
     <script type="text/javascript" src="/javascript/angular-chart.js"></script>
-
     <!-- google maps -->
     <script type="text/javascript" src="/javascript/map/lodash.js"></script>
     <script type="text/javascript" src="/javascript/map/angular-google-maps.js"></script>
@@ -45,6 +44,7 @@
     <script type="text/javascript" src="/javascript/angular-loading-bar/loading-bar.js"></script>
     <!-- angular sanitize -->
     <script type="text/javascript" src="/javascript/angular-sanitize/angular-sanitize.js"></script>
+    
 
 </head>
 <body ng-controller="UsersController">
@@ -58,7 +58,7 @@
     				<span class="icon-bar"></span>
     				<span class="icon-bar"></span>
     			</button>
-    			<a class="navbar-brand" href="#">LitHub</a>
+    			<a class="navbar-brand" href="#/">LitHub</a>
     		</div>
     		<!-- Collect the nav links, forms, and other content for toggling -->
     		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -69,7 +69,7 @@
     				<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
     			</form>
     			<ul class="nav navbar-nav navbar-right">
-    				<li><a href="#/"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Dispensaries</a></li>
+    				<li><a href="#/dispensaries"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Dispensaries</a></li>
                     <li><a href="#/strains"><span class="glyphicon glyphicon-tree-conifer" aria-hidden="true"></span> Strains</a></li>
                     <li><a href="#/feed"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Feed</a></li>
     				<li ng-if="sessionID" class="dropdown">
@@ -111,8 +111,6 @@
     	</div><!-- /.container-fluid -->
     </nav>
 	<div ng-view=""></div>
-    <!-- <div id='footer' class='row col-md-12 text-center'>
-        <img src="/assets/images/leafly.png" class='img-responsive center-block'>
-    </div> -->
+
 </body>
 </html>

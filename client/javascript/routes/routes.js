@@ -11,6 +11,9 @@ myApp.factory('Socket', function (socketFactory) {
 myApp.config(function ($routeProvider, uiGmapGoogleMapApiProvider) {
 	$routeProvider
 		.when('/', {
+			templateUrl: 'partials/landing.html'
+		})
+		.when('/dispensaries', {
 			templateUrl: 'partials/map.html'
 		})
 		.when('/strains', {

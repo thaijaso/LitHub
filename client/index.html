@@ -7,11 +7,13 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/angular-chart.css">
     <!-- glyphicons -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    
     <!-- angular and jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-route.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    
     <!-- socekts -->
     <script src="https://cdn.socket.io/socket.io-1.3.7.js"></script>
     <script src="/javascript/angular-socket-io-master/socket.js"></script>
@@ -33,15 +35,21 @@
     <script type="text/javascript" src="/javascript/controllers/vendors_controller.js"></script>
     <script type="text/javascript" src="/javascript/factories/strain_detail_factory.js"></script>
     <script type="text/javascript" src="/javascript/controllers/strain_details_controller.js"></script>
+    <script type="text/javascript" src="/javascript/factories/landing_factory.js"></script>
+    <script type="text/javascript" src="/javascript/controllers/landings_controller.js"></script>
+
     <!-- graph -->
     <script type="text/javascript" src="/javascript/Chart.min.js"></script>
     <script type="text/javascript" src="/javascript/angular-chart.js"></script>
+    
     <!-- google maps -->
     <script type="text/javascript" src="/javascript/map/lodash.js"></script>
     <script type="text/javascript" src="/javascript/map/angular-google-maps.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyDrosyiujRwCaCxmqPEpxqxL2y9TDA1pAc"></script>
+    
     <!-- angular loading bar -->
     <script type="text/javascript" src="/javascript/angular-loading-bar/loading-bar.js"></script>
+    
     <!-- angular sanitize -->
     <script type="text/javascript" src="/javascript/angular-sanitize/angular-sanitize.js"></script>
     
@@ -110,7 +118,43 @@
     		</div><!-- /.navbar-collapse -->
     	</div><!-- /.container-fluid -->
     </nav>
-	<div ng-view=""></div>
+	
+    <div ng-view=""></div>
 
+    <!-- Footer -->
+        <footer class="footer-section" role="contentinfo">
+
+            <div class="container">
+
+                <div class="row">
+
+                   
+
+                    <div class="col-md-12 col-footer col-padding">
+                        
+                        <!-- Footer 1 -->
+                        <section class="text-center">
+                            <p>LitHub&trade;, LLC 2015. All Rights Reserved. <br><a href="#fakelinks">Terms</a> and <a href="#fakelinks">Privacy Policy</a>.</p>
+                        </section>
+
+                        <!-- Social media links -->
+                        <ul class="social-media-links">
+
+                            <li><a class="fa fa-twitter tw" href="#fakelinks"></a></li>
+                            <li><a class="fa fa-facebook fb" href="http://facebook.com/getlithub"></a></li>
+                            <li><a class="fa fa-pinterest pn" href="#fakelinks"></a></li>
+                            
+                        </ul> <!-- /.social-media-links -->
+
+                    </div> <!-- /.col-md-4 -->
+
+                    <div class="col-md-4 col-footer">
+                    </div> <!-- /.col-md-4 -->
+                    
+                </div> <!-- /.row -->
+
+            </div> <!-- /.container -->
+
+        </footer> <!-- /.footer-section -->
 </body>
 </html>

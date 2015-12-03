@@ -4,6 +4,7 @@ var users = require('./../server/controllers/users_controller');
 var reservations = require('./../server/controllers/reservations_controller');
 var vendors = require('./../server/controllers/vendors_controller');
 var dispensaries = require('./../server/controllers/dispensaries_controller');
+var landings = require('./../server/controllers/landings_controller');
 
 //var session = require('express-session');
 
@@ -99,6 +100,11 @@ module.exports = function(app) {
 
 	app.post('/reservationPickedUp', function(req, res) {
 		vendors.pickedUp(req, res);
+	});
+
+	app.post('/addEmail', function(req, res) {
+		console.log("at routes");
+		landings.addEmail(req, res);
 	});
 
 }

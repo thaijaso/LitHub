@@ -2,7 +2,17 @@ myApp.factory('VendorFactory', function ($http) {
 	var factory = {};
 	var vendor_id;
 	if (sessionStorage.getItem('sessionVendor_id') != undefined) {
+		console.log('Session is carrying a vendor ID: ', sessionStorage.getItem('sessionVendor_id'));
 		vendor_id = sessionStorage.getItem('sessionVendor_id');
+	} else {
+
+	}
+
+	factory.makeAvailable = function(orderInfo, callback) {
+		$http.post('/reservationAvailable', {deviceToken: orderInfo.deviceToken}).success(function () {
+			console.log('Successfully told the user their reservation is available');
+			callback()
+		})
 	}
 
 	factory.returnVendor_id = function(callback) {
@@ -28,6 +38,7 @@ myApp.factory('VendorFactory', function ($http) {
 	}
 
 	factory.available = function(reservationID, callback) {
+		
 		$http.post('/available', {id: reservationID}).success(function () {
 			callback();
 		});

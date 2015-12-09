@@ -5,6 +5,7 @@ var reservations = require('./../server/controllers/reservations_controller');
 var vendors = require('./../server/controllers/vendors_controller');
 var dispensaries = require('./../server/controllers/dispensaries_controller');
 var landings = require('./../server/controllers/landings_controller');
+var parse = require('./../server/controllers/parse_controller');
 
 //var session = require('express-session');
 
@@ -105,6 +106,11 @@ module.exports = function(app) {
 	app.post('/addEmail', function(req, res) {
 		console.log("at routes");
 		landings.addEmail(req, res);
+	});
+
+	app.post('/reservationAvailable', function(req, res) {
+		console.log("Reservation is available")
+		parse.reservationAvailable(req, res);
 	});
 
 }

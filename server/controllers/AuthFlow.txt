@@ -1,0 +1,41 @@
+Vendor Logs In --> Has live feed of orders via sockets
+
+User Logs in --> Submits an order to the server via HTTP --> Server should tell vendor and automaticaly update vendor reservations page via sockets --> After vendor is found, angular auto updates the orders page
+
+Vendor confirms order (made available) via HTTP --> server api sees this and calls a function that will update the user on their order via sockets --> user order page updated
+
+The problem:
+	The user can submit an order successfully in to the DB, but the vendor is not notified immediatly because we have no way of knowing which socket id the vendor is using. Even if we do know, disconnects can change their socket id. If the vendor isn't connected, it wont work period. 
+
+The solution:
+	User submits Order --> Server receives order and saves it to DB --> Server goes through the list of connected socket clients and finds the vendor --> Server emits socket to specific vendor to update their reservations
+
+	The flow for the vendor: Vendor goes to website --> A non identifying socket ID is now generated --> Vendor signs in --> Server needs to add the vendor ID as a key to the current socket ID 
+
+
+Right now when a user submits an order and the vendor updates it to available:
+	- if the app is open the sockets will change the view to the updated availability
+	- when the app is open there is no (AFAIK) push notification that it is available
+	- when the app closes and the user has a submitted order, their socket connection is stopped and it is deleted from the clients array on the server. 
+	-if the app loses its socket connection, there is no way to send them any push notifs or sockets because it was deleted from the client array and the device token is lost.
+
+SOLUTION:
+	When the user submits an order, have them subscribe to a parse channel that contains their reservation number. When the server finds the right vendor and sends the order to them, the vendor also becomes subscribed to the channel. When the vendor updates the order, it sends a push to the subscribed channels. This doesn't require the iphone to have an open socket connection.
+
+Problem: If the device disconnects from the socket, it remains in the devices array. If/when the device reconnects, it is appended to the array again. This is a problem because when we send pushes it is sent to every device that has the same user id. 
+CONDENSED: NEED A WAY TO TARGET THE DEVICE PUSH EVEN IF IT IS NOT CONNECTED.
+Solution(s): 
+	1) Add the channel identifier that the push is sent to in the order details. This way it is saved in the DB and can be retrieved at any time.
+	2) When the user submits a new order and it is input in to the DB, they are returned a reservation ID of their new order. They can then send this id with the socket to the server. The id can be appended to an array. When the vendor updates the order, it sends the reservation id in the socket to the server, which can cross-check it with the array and send it to the correct user.
+
+	STEPS: 
+	1) add the reservation id to the socket on send back.
+	2) socket function on server will add the 
+
+
+
+User submits order --> Server inserts
+				   --> emits (newReservation) --> subscribes to parse channel
+
+
+If the vendor knows the device identifier (which stays the same for each app installation), then they can send a push specifically to it. Instead of holding it on the server, add it to the socket that tells them there is a new reservation, and keep it attached to the buttons so the request when clicked contains the right device id.

@@ -1,11 +1,27 @@
 myApp.controller('VendorsController', function ($scope, $location, $routeParams, VendorFactory, UserFactory, Socket) {
 
-	Socket.on('UpdateReservations', function() {
-		console.log('sockets are success!');
+	Socket.on('UpdateReservations', function(orderInfo) {
+		//Grabs new reservations
+		console.log('sockets are success! The vendor received this: ', orderInfo);
+		var orderInfo = orderInfo;
+		// VendorFactory.makeAvailable(function(orderInfo) {
+		// 	console.log('The reservation has been made available for the customer');
+		// });
+
 		VendorFactory.getReservations(vendor_id, function (allReservations){
 			$scope.allreservations  = allReservations;
 		});
 	});
+
+
+
+	Socket.on('NewOrderSubmitted', function(orderInfo) {
+		var userId = orderInfo.user_id;
+		var vendorId = orderInfo.vendor_id;
+
+	});
+
+
 
     $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
   	$scope.series = ['Series A', 'Series B'];
@@ -19,13 +35,23 @@ myApp.controller('VendorsController', function ($scope, $location, $routeParams,
 
 
 	VendorFactory.returnVendor_id(function(data){
-		vendor_id = data;
+		if (data != undefined) {
+			console.log('This is the data from the returnVendor_id function in the vendors controller: ', data);
+			vendor_id = data;
+			Socket.emit('VendorLoggedIn', vendor_id);
+		} else if (sessionStorage.getItem('sessionVendor_id') != undefined) {
+			console.log('This is the data from the returnVendor_id function in the vendors controller: ', data);
+			vendor_id = sessionStorage.getItem('sessionVendor_id');
+			Socket.emit('VendorLoggedIn', vendor_id);
+		}
+		
+		console.log('VendorLoggedIn socket sent with vendor id: ', vendor_id);
 	});
 
 	// Vendor Dashboard - vendors checking their orders
 	VendorFactory.getReservations(vendor_id, function (allReservations){
 		$scope.allreservations  = allReservations;
-
+		console.log($scope.allreservations);
 	});
 
 	VendorFactory.getMenu($routeParams.id, function (menu) {
@@ -52,9 +78,13 @@ myApp.controller('VendorsController', function ($scope, $location, $routeParams,
 		//console.log('Here is the count of the hybrids: ', $scope.hybrids.count)
 	});
 
+	//User submits order (socket with userId sent) --> Vendor receives the user id and order --> Vendor sends a socket back to update the users page -->
+	//User should then receive a push notification
+
 	$scope.available = function(reservationID) {
 		console.log(reservationID);
 		VendorFactory.available(reservationID, function () {
+			// Socket.emit('MakeAvailable', )
 			VendorFactory.getReservations(vendor_id, function (allReservations){
 				$scope.allreservations  = allReservations;
 				VendorFactory.getUserIdForReservation(reservationID, function (userId) {

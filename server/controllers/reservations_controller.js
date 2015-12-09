@@ -51,7 +51,15 @@ module.exports = (function() {
 					if (error) {
 						console.log(error);
 					} else {
-						res.json({});
+						connection.query("SELECT LAST_INSERT_ID()", function(error, result) {
+							if (error) {
+								console.log(error);
+							} else {
+								res.json(result);
+							}
+						})
+						//Since a new reservation was added, we need to somehow alert the specific vendor
+
 					}
 				});
 				connection.release();

@@ -22,14 +22,15 @@ myApp.factory('UserFactory', function ($http) {
 			console.log(userFound[0]);
 
 	     	var vendorID;
+	     	//Check if the vendor status bool is true
 	     	if (userFound[0].vendor_status) {
 	     		console.log(userFound[0].user_vendor_id);
 	     		vendorID = userFound[0].user_vendor_id;
-
+	     		socket.emit("VendorLoggedIn", vendorID);
 	     	}
             //console.log(socket);
             var userData = {"userID": userID, "vendorID": vendorID};
-            socket.emit("UserLoggedIn", userData);
+            // socket.emit("UserLoggedIn", userData);
             
             
 	        console.log('here');

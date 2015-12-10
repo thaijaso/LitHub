@@ -173,6 +173,8 @@ io.sockets.on('connection', function (socket) {
                     console.log("user found at key, ", key);
                     var socketId = key;
                     io.to(socketId).emit("MadeAvailable");
+                } else {
+                    console.log("device not connected");
                 }
             }
 		});

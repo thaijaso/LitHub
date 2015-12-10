@@ -88,7 +88,14 @@ myApp.controller('VendorsController', function ($scope, $location, $routeParams,
 			VendorFactory.getReservations(vendor_id, function (allReservations){
 				$scope.allreservations  = allReservations;
 				//Socket to send to the server for push notification
-				Socket.emit("MakeAvailable", device_id);
+				VendorFactory.getUserIdForReservation(reservationID, function (userId) {
+					var userId = userId[0].user_id;
+					var deviceId = device_id[0].device_id;
+					var userInfo = {userId: userId, deviceId: deviceId};
+					console.log("this is userInfo: ", userInfo);
+					Socket.emit("MakeAvailable", userInfo);
+					
+				});	
 			});
 		});
 	}

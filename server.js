@@ -143,55 +143,71 @@ io.sockets.on('connection', function (socket) {
         });
 
         //Vendor made the order available for pickup
-		socket.on('MakeAvailable', function (device_id) {
-			//console.log('server:: vendor made it available');
-			//console.log('userId:', userId);
-            var deviceId = device_id[0].device_id;
-            Parse.Push.send({
-                        channels: [deviceId],
-                        data: {
-                            alert: "Your order is available for pick-up!"
-                        }
-                    }, {
-                        success: function() {
-                        // Push was successful
-                        console.log('Successfully told iOS device that order is ready');
-                        },
-                        error: function(error) {
-                        // Handle error
-                        console.log('We received an error: ', error);
-                        }
-                    });
+		socket.on('MakeAvailable', function (userInfo) {
+			console.log('server:: vendor made it available');
+			console.log("this is userInfo, ", userInfo);
             
+            var userId = userInfo.userId
+            var deviceId = userInfo.deviceId;
+            
+            //send push notification
+            Parse.Push.send({
+                channels: [deviceId],
+                data: {
+                    alert: "Your order is available for pick-up!"
+                }
+            }, {
+                success: function() {
+                // Push was successful
+                    console.log('Successfully told iOS device that order is ready');
+                },
+                error: function(error) {
+                // Handle error
+                    console.log('We received an error: ', error);
+                }
+            });
+
+            //send made available event to ios
+            for (key in clients) {
+                if (clients[key].userID == userId) {
+                    console.log("user found at key, ", key);
+                    var socketId = key;
+                    io.to(socketId).emit("MadeAvailable");
+                }
+            }
 		});
 
         socket.on('PickedUp', function (userId) {
             console.log('server: user picked up from vendor');
             console.log('userId: ', userId);
+
+            //send socket event to ios
             for (key in clients) {
                 if (clients[key].userID == userId) {
                     console.log("user found at key, ", key);
                     var socketId = key;
                     io.to(socketId).emit("PickedUp");
-                    var deviceToPush = clients[key].deviceToken;
-                    var query = new Parse.Query(Parse.Installation);
-                    query.equalTo("deviceToken", deviceToPush);
-                    Parse.Push.send({
-                        where: query,
-                        data: {
-                            alert: "You picked up your order! Please rate your experience."
-                        }
-                    }, {
-                        success: function() {
-                            // Push was successful
-                            console.log("push was succesful to token: ", deviceToPush);
-                        },
-                        error: function(error) {
-                            console.log(error);
-                        }
-                    }); 
                 }
             }
+
+            //send push notification
+            // var deviceToPush = clients[key].deviceToken;
+            // var query = new Parse.Query(Parse.Installation);
+            // query.equalTo("deviceToken", deviceToPush);
+            // Parse.Push.send({
+            //     where: query,
+            //     data: {
+            //         alert: "You picked up your order! Please rate your experience."
+            //     }
+            // }, {
+            //     success: function() {
+            //         // Push was successful
+            //         console.log("push was succesful to token: ", deviceToPush);
+            //     },
+            //     error: function(error) {
+            //         console.log(error);
+            //     }
+            // }); 
         });
 
         socket.on('OrderCompleted', function (vendorId) {

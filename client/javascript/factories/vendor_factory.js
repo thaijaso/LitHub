@@ -38,9 +38,9 @@ myApp.factory('VendorFactory', function ($http) {
 	}
 
 	factory.available = function(reservationID, callback) {
-		
-		$http.post('/available', {id: reservationID}).success(function () {
-			callback();
+
+		$http.post('/available', {id: reservationID}).success(function (device_id) {
+			callback(device_id);
 		});
 	}
 

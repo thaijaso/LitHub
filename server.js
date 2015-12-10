@@ -120,7 +120,7 @@ io.sockets.on('connection', function (socket) {
                 if (clients[key].vendorID == orderInfo["vendor_id"]) {
                     //console.log("vendor found at key", key)
                     socketid = key;
-                    io.to(socketid).emit("UpdateReservations", orderInfo);
+                    io.to(socketid).emit("UpdateReservations");
                 } 
             }
             
@@ -136,22 +136,19 @@ io.sockets.on('connection', function (socket) {
                 for (vendorSocketID in clients) {
                     if (clients[vendorSocketID].vendorID == orderData["vendor_id"]) {
                         // var deviceToken = orderData["device_token"];
-                        io.to(vendorSocketID).emit("UpdateReservations", orderData["device_id"]);
+                        io.to(vendorSocketID).emit("UpdateReservations");
                     }
                 }
             }
         });
 
         //Vendor made the order available for pickup
-		socket.on('MakeAvailable', function (userId) {
+		socket.on('MakeAvailable', function (device_id) {
 			//console.log('server:: vendor made it available');
 			//console.log('userId:', userId);
-
-			for (device in devices) {
-                if (devices[device].userID == userId) {
-                    io.to(device).emit("MadeAvailable");
-                    Parse.Push.send({
-                        channels: [devices[device].device_id],
+            device_id = device_id
+            Parse.Push.send({
+                        channels: [device_id],
                         data: {
                             alert: "Your order is available for pick-up!"
                         }
@@ -165,9 +162,6 @@ io.sockets.on('connection', function (socket) {
                         console.log('We received an error: ', error);
                         }
                     });
-
-                }
-            }
             
 		});
 

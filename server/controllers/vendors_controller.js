@@ -45,7 +45,13 @@ module.exports = (function() {
 						console.log(error);
 					} else {
 						//console.log("this is the fields: ", fields);
-						res.json({});
+						connection.pause();
+						connection.resume();
+						//If updating the reservation for pickup succeeds, get the ID of the device
+						connection.query("SELECT reservations.device_id FROM reservations WHERE id = " + "'" + req.body.id + "'", function(error, result, fields) {
+							res.json(result);
+						})
+						
 					}
 				});
 				connection.release();

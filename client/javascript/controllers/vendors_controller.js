@@ -2,7 +2,7 @@ myApp.controller('VendorsController', function ($scope, $location, $routeParams,
 
 	Socket.on('UpdateReservations', function(orderInfo) {
 		//Grabs new reservations
-		console.log('sockets are success! The vendor received this: ', orderInfo);
+		console.log('The vendor received this: ', orderInfo);
 		var orderInfo = orderInfo;
 		// VendorFactory.makeAvailable(function(orderInfo) {
 		// 	console.log('The reservation has been made available for the customer');
@@ -83,16 +83,12 @@ myApp.controller('VendorsController', function ($scope, $location, $routeParams,
 
 	$scope.available = function(reservationID) {
 		console.log(reservationID);
-		VendorFactory.available(reservationID, function () {
+		VendorFactory.available(reservationID, function (device_id) {
 			// Socket.emit('MakeAvailable', )
 			VendorFactory.getReservations(vendor_id, function (allReservations){
 				$scope.allreservations  = allReservations;
-				VendorFactory.getUserIdForReservation(reservationID, function (userId) {
-					console.log("this is the userID", userId[0].user_id);
-					Socket.emit("MakeAvailable", userId[0].user_id);
-				});
-				
-
+				//Socket to send to the server for push notification
+				Socket.emit("MakeAvailable", device_id);
 			});
 		});
 	}

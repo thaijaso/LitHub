@@ -87,11 +87,15 @@ myApp.controller('VendorsController', function ($scope, $location, $routeParams,
 			// Socket.emit('MakeAvailable', )
 			VendorFactory.getReservations(vendor_id, function (allReservations){
 				$scope.allreservations  = allReservations;
+				console.log(allReservations);
+
 				//Socket to send to the server for push notification
 				VendorFactory.getUserIdForReservation(reservationID, function (userId) {
 					var userId = userId[0].user_id;
 					var deviceId = device_id[0].device_id;
-					var userInfo = {userId: userId, deviceId: deviceId};
+					var vendorName = allReservations[0].vendor
+					var userInfo = {userId: userId, deviceId: deviceId, vendorName: vendorName};
+					
 					console.log("this is userInfo: ", userInfo);
 					Socket.emit("MakeAvailable", userInfo);
 					

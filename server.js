@@ -98,10 +98,11 @@ io.sockets.on('connection', function (socket) {
                         clients[UserSocketID].loggedIn = true;
                         clients[UserSocketID].userID = userInfo["userID"];
                         clients[UserSocketID].device_id = userInfo["device_id"];
-                        devices.push(clients[UserSocketID]);
-                        console.log('These are the current connected devices: ', devices);
+                        //devices.push(clients[UserSocketID]);
+                        //console.log('These are the current connected devices: ', devices);
                     }
                 }
+                console.log(clients);
                 // devices[socket.id].loggedIn = true;
                 // devices[socket.id].userID = userInfo["userID"];
                 // devices[socket.id].device_id = userInfo["device_id"];
@@ -143,18 +144,19 @@ io.sockets.on('connection', function (socket) {
         });
 
         //Vendor made the order available for pickup
-		socket.on('MakeAvailable', function (userInfo) {
+		socket.on('MakeAvailable', function (reservationInfo) {
 			console.log('server:: vendor made it available');
-			console.log("this is userInfo, ", userInfo);
+			console.log("this is userInfo, ", reservationInfo);
             
-            var userId = userInfo.userId
-            var deviceId = userInfo.deviceId;
+            var userId = reservationInfo.userId;
+            var deviceId = reservationInfo.deviceId;
+            var vendorName = reservationInfo.vendorName;
             
             //send push notification
             Parse.Push.send({
                 channels: [deviceId],
                 data: {
-                    alert: "Your order is available for pick-up!"
+                    alert: "Your " + vendorName + " reservation is ready for pickup!"
                 }
             }, {
                 success: function() {
@@ -227,6 +229,7 @@ io.sockets.on('connection', function (socket) {
             console.log("socket id disconnecting: ", socket.id);
             
             delete clients[socket.id];
+
             console.log(clients);
             
             

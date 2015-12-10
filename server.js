@@ -146,9 +146,9 @@ io.sockets.on('connection', function (socket) {
 		socket.on('MakeAvailable', function (device_id) {
 			//console.log('server:: vendor made it available');
 			//console.log('userId:', userId);
-            device_id = device_id
+            var deviceId = device_id[0].device_id;
             Parse.Push.send({
-                        channels: [device_id],
+                        channels: [deviceId],
                         data: {
                             alert: "Your order is available for pick-up!"
                         }
